@@ -22,8 +22,8 @@ describe("The FuelConsumption API", function () {
     this.timeout(3000); 
 
     this.beforeEach(async function(){
-        await db.none(`delete from fuel_entries`);
-        await db.none(`delete from vehicles`);
+        await db.none(`delete from fuel_entries cascade`);
+        await db.none(`delete from vehicles cascade`);
     });
 
     it("should be able to add a vehicle with no errors", async function() {

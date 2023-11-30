@@ -131,7 +131,7 @@ export default function FuelConsumptionAPI(db) {
 
         let totalDistance = distance;
         if (currentVehicle && currentVehicle.total_distance) {
-            totalDistance += currentVehicle.total_distance;
+            totalDistance += Number(currentVehicle.total_distance) ;
         }
 
         await db.none(`update vehicles set total_distance = $1 where id = $2`, [totalDistance, vehicleId]);

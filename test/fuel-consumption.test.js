@@ -18,7 +18,6 @@ if (process.env.NODE_ENV == 'production') {
 const db = pgp(config);
 
 describe("The FuelConsumption API", function () {
-
     // set the test time out if needed
     this.timeout(3000); 
 

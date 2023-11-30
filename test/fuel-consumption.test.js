@@ -3,6 +3,8 @@ import pgPromise from 'pg-promise';
 import assert from 'assert';
 
 const pgp = pgPromise();
+const database_url=  process.env.database_url || "postgresql://fuel:fuel@localhost:5432/fuel_consumption";
+
 const config = { 
 	connectionString : database_url
 }

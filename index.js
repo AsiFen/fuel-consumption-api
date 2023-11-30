@@ -8,6 +8,8 @@ import bodyParser from 'body-parser';
 import flash from 'express-flash';
 import session from 'express-session';
 
+import ViewRoute from './routes/view_route.js';
+import AddRoute from './routes/add_route.js';
 import FuelConsumption from './fuel-consumption.js';
 import FuelConsumptionAPI from './fuel-consumption-api.js';
 
@@ -15,6 +17,8 @@ import db from './db/connect.js';
 
 const fuelConsumption = FuelConsumption(db);
 const fuelConsumptionAPI = FuelConsumptionAPI(fuelConsumption)
+const view_route = ViewRoute(fuelConsumption);
+const add_route = AddRoute(fuelConsumption);
 
 const app = express();
 
@@ -38,19 +42,9 @@ app.use(express.static('public'))
 app.use(express.json());
 
 // render the list of vehicles
-app.get('/vehicles', async (req, res) => {
-    try {
-        // Fetch all vehicles and their details from the database
-        const vehiclesData = await fuelConsumptionAPI.vehicles();
-
-        // Render the vehicle data
-        res.render('index', { vehicles: vehiclesData });
-    } catch (error) {
-        res.status(500).send('Error fetching vehicle data.');
-    }
-});
-
-
+app.get('/', view_route.show);
+app.get('/add', async (req, res)=>{ res.render('add')})
+app.post('/add', add_route.addCar)
 
 
 app.get('/api/vehicles', fuelConsumptionAPI.vehicles);
@@ -59,7 +53,7 @@ app.post('/api/vehicle', fuelConsumptionAPI.addVehicle);
 app.post('/api/refuel', fuelConsumptionAPI.refuel);
 
 //process the enviroment the port is running on
-let PORT = process.env.PORT || 4545;
+let PORT = process.env.PORT || 3000;
 //listen on the port - opens the port on the terminal.
 app.listen(PORT, () => {
     console.log('App started...', PORT);

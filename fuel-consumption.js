@@ -20,15 +20,17 @@ export default function FuelConsumptionAPI(db) {
 
         const regex = /^(CA|CY|CF|CAA) \d{3}-\d{3}$/;
         if (!regex.test(regNumber)) {
+            console.log('fail?');
             return {
                 status: "error",
-                message: "regNumber is invalid - should by CA, CY, CF, CAA followed by 3 numbers - 3 numbers"
+                message: "regNumber is invalid - should be CA, CY, CF, CAA followed by 3 numbers - 3 numbers"
             }
         }
 
         const result = await db.oneOrNone(`insert into vehicles (description, reg_number) values ($1, $2) returning id`, [description, regNumber]);
         return {
             status: "success",
+            message: 'success my dear!',
             id: result.id
         };
     }

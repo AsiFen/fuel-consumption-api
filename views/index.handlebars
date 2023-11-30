@@ -1,26 +1,28 @@
-<div class="container">
+<div class="container center mx-auto px-4 py-2">
 
-  <h1>List of Vehicles</h1>
-  <table>
+<div class="text-center">
+      <h1 class="text-3xl mb-4 mx-4 py-2 underline">List of Vehicles   <i class="fas fa-car ml-2"></i> </h1>
+
+</div>
+
+  <table class="w-full border-collapse border border-gray-300">
     <thead>
       <tr>
-        <th>Description</th>
-        <th>Total Distance Traveled</th>
-        <th>Total Fuel Spent</th>
-        <th>Fuel Consumption</th>
+        <th class="py-2 px-4 bg-gray-200 border border-gray-300">Description <i class="fas fa-info-circle mr-2"></i></th>
+        <th class="py-2 px-4 bg-gray-200 border border-gray-300">Total Distance Traveled <i class="fas fa-road mr-2"></i></th>
+        <th class="py-2 px-4 bg-gray-200 border border-gray-300">Total Fuel Spent <i class="fas fa-gas-pump mr-2"></i> </th>
+        <th class="py-2 px-4 bg-gray-200 border border-gray-300">Fuel Consumption  <i class="fas fa-tachometer-alt mr-2"></i></th>
       </tr>
     </thead>
     <tbody>
       {{#each vehicles}}
-      <tr>
-        <td>{{description}}</td>
-        <td>{{totalDistance}}</td>
-        <td>{{totalFuelSpent}}</td>
-        <td>{{fuelConsumption}}</td>
+      <tr class="hover:bg-gray-100">
+        <td class="py-2 px-4 border border-gray-300{{#unless description}} bg-green-200{{/unless}}">{{description}}</td>
+        <td class="py-2 px-4 border border-gray-300{{#unless total_liters}} bg-green-200{{/unless}}">{{total_liters}}</td>
+        <td class="py-2 px-4 border border-gray-300{{#unless total_distance}} bg-green-200{{/unless}}">{{total_distance}}</td>
+        <td class="py-2 px-4 border border-gray-300{{#unless fuel_consumption}} bg-green-200{{/unless}}">{{fuel_consumption}}</td>
       </tr>
       {{/each}}
     </tbody>
   </table>
-
-
 </div>

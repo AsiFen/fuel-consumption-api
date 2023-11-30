@@ -1,0 +1,30 @@
+<div class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-4">Add Car</h1>
+  
+        <!-- Rendering flash messages -->
+        {{#if messages.error}}
+            <div class="alert alert-danger">
+                {{messages.error}}
+            </div>
+        {{/if}}
+
+        {{#if messages.success}}
+            <div class="alert alert-success">
+                {{messages.success}}
+            </div>
+        {{/if}}
+
+        <form action="/add" method="post" class="mb-4">
+            <div class="flex flex-col mb-4">
+                <label for="description" class="text-gray-600">Description:</label>
+                <input type="text" id="description" name="description" class="border border-gray-300 px-3 py-2 mt-1">
+            </div>
+            <div class="flex flex-col mb-4">
+                <label for="regNumber" class="text-gray-600">Registration Number:</label>
+                <input type="text" id="regNumber" name="regNumber" class="border border-gray-300 px-3 py-2 mt-1">
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Car</button>
+        </form>
+    </div>
+</div>

@@ -12,8 +12,9 @@ export default function RecordRoute(fuel_consumption) {
             } else {
                 filled_up = false;
             }
+            console.log(distance);
             const result = await fuel_consumption.refuel(req.params.id, liters, amount, distance, filled_up);
-            console.log(result);
+            // console.log(result);
             if (result.status === 'success') {
                 req.flash('success', result.message);
                 // console.log(result.message);
@@ -22,8 +23,6 @@ export default function RecordRoute(fuel_consumption) {
                 res.redirect('/record/' + req.params.id)
             } else {
                 req.flash('error', result.message);
-                res.redirect('/record' + req.params.id)
-
             }
         }
     }

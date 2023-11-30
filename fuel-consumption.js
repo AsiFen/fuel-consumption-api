@@ -63,7 +63,7 @@ export default function FuelConsumptionAPI(db) {
                 message: "amount not specified"
             }
         }
-
+        console.log(distance);
         const result = await db.oneOrNone(`
             insert into fuel_entries(
                 vehicle_id,
@@ -81,6 +81,7 @@ export default function FuelConsumptionAPI(db) {
             distance,
             filled_up
         ]);
+
 
         //
         const results = await db.oneOrNone(`
@@ -121,6 +122,20 @@ export default function FuelConsumptionAPI(db) {
 
             }
         }
+        
+        //need to add code to update the total distance travel for the vehicle
+        // Update total distance traveled for the vehicle
+        // get the current total_distance for the vehicle from the database
+        //calculate the new total_distance by adding the provided distance to the existing total distance 
+        const currentVehicle = await db.oneOrNone(`select total_distance from vehicles where id = $1`, [vehicleId]);
+
+        let totalDistance = distance;
+        if (currentVehicle && currentVehicle.total_distance) {
+            totalDistance += currentVehicle.total_distance;
+        }
+
+        await db.none(`update vehicles set total_distance = $1 where id = $2`, [totalDistance, vehicleId]);
+
 
         await db.none(`update vehicles set fuel_consumption = $1 where id = $2`,
             [fuelConsumption, vehicleId]);

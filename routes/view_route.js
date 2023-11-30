@@ -5,6 +5,7 @@ export default function ViewRoute(fuelConsumption) {
                 // Fetch all vehicles and their details from the database
                 const vehiclesData = await fuelConsumption.vehicles();
                 // Render the vehicle data
+                console.log(vehiclesData.total_liters);
                 res.render('index', { vehicles: vehiclesData });
             } catch (error) {
                 res.status(500).send('Error fetching vehicle data.');

@@ -1,0 +1,26 @@
+<div class="container">
+
+  <h1>List of Vehicles</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Total Distance Traveled</th>
+        <th>Total Fuel Spent</th>
+        <th>Fuel Consumption</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each vehicles}}
+      <tr>
+        <td>{{description}}</td>
+        <td>{{totalDistance}}</td>
+        <td>{{totalFuelSpent}}</td>
+        <td>{{fuelConsumption}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+
+</div>

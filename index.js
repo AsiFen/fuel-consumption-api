@@ -37,43 +37,19 @@ app.use(bodyParser.json())
 app.use(express.static('public'))
 app.use(express.json());
 
-// Define a route to display all vehicles with their details
+// render the list of vehicles
 app.get('/vehicles', async (req, res) => {
     try {
-      // Get all vehicles
-      const allVehicles = await fuelAPI.vehicles();
-  
-      // Prepare the data to display on the screen
-      const vehiclesData = await Promise.all(
-        allVehicles.map(async (vehicle) => {
-          const { id, description } = vehicle;
-  
-          // Get total distance traveled
-          const totalDistance = await calculateTotalDistance(id);
-  
-          // Get total fuel spent
-          const totalFuelSpent = await calculateTotalFuelSpent(id);
-  
-          // Get fuel consumption
-          const fuelConsumption = await calculateFuelConsumption(id);
-  
-          return {
-            id,
-            description,
-            totalDistance,
-            totalFuelSpent,
-            fuelConsumption,
-          };
-        })
-      );
-  
-      // Render the vehicles data on a screen
-      res.json(vehiclesData); // You can render this data on a webpage or in any desired format
+        // Fetch all vehicles and their details from the database
+        const vehiclesData = await fuelConsumptionAPI.vehicles();
+
+        // Render the vehicle data
+        res.render('index', { vehicles: vehiclesData });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+        res.status(500).send('Error fetching vehicle data.');
     }
-  });
-  
+});
+
 
 
 

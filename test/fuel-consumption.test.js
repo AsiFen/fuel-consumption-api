@@ -3,10 +3,10 @@ import pgPromise from 'pg-promise';
 import assert from 'assert';
 
 const pgp = pgPromise();
-const DATABASE_URL=  "postgresql://fuel:fuel@localhost:5432/fuel_consumption";
+const database_url=  "postgresql://fuel:fuel@localhost:5432/fuel_consumption";
 
 const config = { 
-	connectionString : DATABASE_URL
+	connectionString : database_url
 }
 
 if (process.env.NODE_ENV == 'production') {

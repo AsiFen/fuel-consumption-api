@@ -1,0 +1,47 @@
+<div class="bg-gray-100">
+
+    <div class="container mx-auto px-4 py-8">
+
+   {{#if messages.error}}
+            <div class="alert alert-danger">
+                {{messages.error}}
+            </div>
+        {{/if}}
+
+        {{#if messages.success}}
+            <div class="alert alert-success">
+                {{messages.success}}
+            </div>
+        {{/if}}
+        {{#if id}}
+        <h1 class="text-3xl font-bold mb-6">Refilla</h1>
+
+        <form id="fuelRecordForm" action="/record/{{id}}" method="post">
+            <div class="mb-4">
+                <label for="vehicleId" class="block text-gray-700">Vehicle ID:</label>
+                <input type="text" id="vehicleId" class="form-input mt-1 block w-full" value="{{id}}"
+                    placeholder="Enter Vehicle ID">
+            </div>
+            {{/if}}
+            <div class="mb-4">
+                <label for="liters" class="block text-gray-700">Liters:</label>
+                <input type="number" id="liters" name="lit" class="form-input mt-1 block w-full"
+                    placeholder="Enter Liters">
+            </div>
+            <div class="mb-4">
+                <label for="amount" class="block text-gray-700">Amount:</label>
+                <input type="number" name="amount" id="amount" class="form-input mt-1 block w-full" placeholder="Enter Amount">
+            </div>
+            <div class="mb-4">
+                <label for="distance"  class="block text-gray-700">Distance:</label>
+                <input type="number" name="distance" id="distance" class="form-input mt-1 block w-full" placeholder="Enter Distance">
+            </div>
+            <div class="mb-4">
+                <input type="checkbox" name="filled_up" id="filled_up" class="form-checkbox">
+                <label for="filled_up" class="inline-block text-gray-700 ml-2">Filled Up</label>
+            </div>
+            <button type="submit"
+                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+        </form>
+    </div>
+</div>

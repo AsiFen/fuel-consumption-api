@@ -128,6 +128,7 @@ export default function FuelConsumptionAPI(db) {
 
         return {
             status: "success",
+            message: 'Refuel recorded successfully',
             id: result.id
         }
 

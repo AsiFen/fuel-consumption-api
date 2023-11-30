@@ -14,11 +14,13 @@ import FuelConsumption from './fuel-consumption.js';
 import FuelConsumptionAPI from './fuel-consumption-api.js';
 
 import db from './db/connect.js';
+import RecordRoute from './routes/record_route.js';
 
 const fuelConsumption = FuelConsumption(db);
 const fuelConsumptionAPI = FuelConsumptionAPI(fuelConsumption)
 const view_route = ViewRoute(fuelConsumption);
 const add_route = AddRoute(fuelConsumption);
+const record_route = RecordRoute(fuelConsumption);
 
 const app = express();
 
@@ -43,9 +45,13 @@ app.use(express.json());
 
 // render the list of vehicles
 app.get('/', view_route.show);
-app.get('/add', async (req, res)=>{ res.render('add')})
+app.get('/add', async (req, res) => { res.render('add') })
 app.post('/add', add_route.addCar)
-
+app.post('/record/:id', record_route.recordCar)
+app.get('/record/:id', async (req, res) => {
+    let id = req.params.id;
+    res.render('record', {id})
+})
 
 app.get('/api/vehicles', fuelConsumptionAPI.vehicles);
 app.get('/api/vehicle', fuelConsumptionAPI.vehicle);
